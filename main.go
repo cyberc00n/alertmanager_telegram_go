@@ -10,6 +10,7 @@ import (
 )
 
 type Alert struct {
+	Status      string            `json:"status"`
 	Labels      map[string]string `json:"labels"`
 	Annotations map[string]string `json:"annotations"`
 }
@@ -55,7 +56,16 @@ func main() {
 }
 
 func formatAlertMessage(alert Alert) string {
-	return "Alert received: " + alert.Annotations["description"]
+	statusMessage := ""
+	switch alert.Status {
+	case "resolved":
+		statusMessage = "Service recovered: "
+	case "firing":
+		statusMessage = "Alert triggered: "
+	default:
+		statusMessage = "Alert received: "
+	}
+	return statusMessage + alert.Annotations["description"]
 }
 
 func sendMessage(bot *tgbotapi.BotAPI, msg string) {
