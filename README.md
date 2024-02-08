@@ -2,7 +2,7 @@
 
 #### 📦 Requirements:
 - go 1.21.1
-- web-serer for routing
+- web-server for routing
 - or us can deploy it as a container
 
 
