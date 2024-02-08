@@ -29,13 +29,19 @@ func main() {
 		log.Panic(err)
 	}
 
+	log.Printf("Bot successfully started")
+
 	http.HandleFunc("/alert", func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("Received new request")
+
 		var m WebhookMessage
 		if err := json.NewDecoder(r.Body).Decode(&m); err != nil {
-			log.Printf("could not decode message: %v", err)
-			http.Error(w, "could not decode message", http.StatusBadRequest)
+			log.Printf("Could not decode message: %v", err)
+			http.Error(w, "Could not decode message", http.StatusBadRequest)
 			return
 		}
+
+		log.Printf("Message decoded successfully")
 
 		for _, alert := range m.Alerts {
 			msg := formatAlertMessage(alert)
@@ -49,13 +55,13 @@ func main() {
 }
 
 func formatAlertMessage(alert Alert) string {
-	// Форматируйте сообщение здесь
 	return "Alert received: " + alert.Annotations["description"]
 }
 
 func sendMessage(bot *tgbotapi.BotAPI, msg string) {
+	log.Printf("Sending message: %s", msg)
 	message := tgbotapi.NewMessageToChannel(chatID, msg)
 	if _, err := bot.Send(message); err != nil {
-		log.Printf("could not send message: %v", err)
+		log.Printf("Could not send message: %v", err)
 	}
 }
