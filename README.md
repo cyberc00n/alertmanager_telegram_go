@@ -10,7 +10,7 @@
 
 1. Clone this repo:
 ```
-git clone https://github.com/cyberc00n/alertmanager_telegram_go.git
+git clone https://github.com/cyberc00n/alertmanager_telegram_webhook.git
 ```
 2. Build image:
 
