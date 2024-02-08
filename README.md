@@ -3,7 +3,7 @@
 #### 📦 Requirements:
 - go 1.21.1
 - web-server for routing
-- or us can deploy it as a container
+- or you can deploy it as a container
 
 
 #### 🐋 Docker deploy:
